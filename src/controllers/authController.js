@@ -18,4 +18,23 @@ export async function signUp (req,res){
         res.status(500).send(err.message)
     }
 
+
+}
+
+
+export async function signIn(req,res){
+ const user=res.local.user
+
+const token = uuidV4()
+
+ try{
+    await db.query(`
+    INSERT INTO tokenList (token) VALUES($1)
+    `,[token])
+
+ }catch(err){
+    console.log(err)
+    res.sendStatus(500)
+ }
+
 }
