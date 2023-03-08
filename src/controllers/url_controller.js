@@ -1,12 +1,12 @@
-import { nanoid } from "nanoid";
-import db from "../dbconfig/database";
+import { nanoid } from "nanoid"
+import db from "../dbconfig/database"
 
 export async function shortenUrl (req,res){
     const {id} =res.locals.user
 
-    const  {url}  = req.body;
+    const  {url}  = req.body
 
-  const shortUrl = nanoid(8);
+  const shortUrl = nanoid(8)
 
   try {
     await db.query(
@@ -39,7 +39,7 @@ export async function getUrlId(req, res) {
       res.send(url)
     } catch (error) {
       console.log(error)
-
+      
       return res.status(500).send(error.message)
     }
   }
