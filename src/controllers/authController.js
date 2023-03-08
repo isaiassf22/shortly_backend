@@ -29,8 +29,8 @@ const token = uuidV4()
 
  try{
     await db.query(`
-    INSERT INTO tokenList (token) VALUES($1)
-    `,[token])
+    INSERT INTO tokenList (token,userId) VALUES($1)
+    `,[token,user.id])
 
  }catch(err){
     console.log(err)

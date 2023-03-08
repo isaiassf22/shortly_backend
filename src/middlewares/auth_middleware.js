@@ -1,6 +1,7 @@
 import { userSchema } from "../schema/authSchema.js"
 import db from "../dbconfig/database.js"
 import bcrypt from "bcrypt"
+import { v4 as uuidV4 } from "uuid"
 
 
 export async function userValidate (req,res,next){
@@ -28,11 +29,21 @@ export async function signInValidate(req,res,next){
         `,[email])
         if(check.rowCount>0){
              const decryptPassword = bcrypt.compareSync(password,check[0].password)
-             if(!decryptPassword){
-              return  res.sendStatus(401)
+             if(decryptPassword){
+              const token = uuidV4()
+              await db.query(`
+              INSERT INTO  tokenList (userId,token) VALUES ($1,$2)
+              `,[check[0].id,token])
+
+              res.send(token)
+
+             }else{
+                return  res.sendStatus(401)
              }
 
         }
+
+
 
         res.local.user=check
     }catch(err){
@@ -41,3 +52,4 @@ export async function signInValidate(req,res,next){
     }
     next()
 }
+
