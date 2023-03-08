@@ -5,7 +5,7 @@ import { session } from "../middlewares/session_token.js";
 
 const usersRoute = Router()
 
-usersRoue.get("/users/me",session,getUserById)
-usersRoue.get("/ranking",getRanking)
+usersRoute.get("/users/me",session,getUserById)
+usersRoute.get("/ranking",getRanking)
 
 export default usersRoute

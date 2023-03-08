@@ -1,5 +1,5 @@
 import { nanoid } from "nanoid"
-import db from "../dbconfig/database"
+import db from "../dbconfig/database.js"
 
 export async function shortenUrl (req,res){
     const {id} =res.locals.user
