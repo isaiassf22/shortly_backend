@@ -1,3 +1,7 @@
+import db from "../dbconfig/database.js";
+
+
+
 export async function getUserById(req, res) {
     const { user } = res.locals
   

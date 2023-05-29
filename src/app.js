@@ -8,12 +8,10 @@ import usersRoute from "./routes/use_routes.js"
 dotenv.config()
 
 const app= express()
-
-app.use(cors())
 app.use(express.json())
+app.use(cors())
 app.use(authRoute)
-app.use(urlRoutes)
-app.use(usersRoute)
 
-const port =process.env.PORT || 5002
+
+const port =process.env.PORT || 4002
 app.listen(port, ()=> console.log("app running sucessfuly"))

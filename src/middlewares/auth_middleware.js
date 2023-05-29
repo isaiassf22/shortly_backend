@@ -1,22 +1,19 @@
-import { userSchema } from "../schema/authSchema.js"
+
 import db from "../dbconfig/database.js"
 import bcrypt from "bcrypt"
 import { v4 as uuidV4 } from "uuid"
 
 
-export async function userValidate (req,res,next){
-    const user = req.body
-
-    const {error,value}= userSchema.validate(user, {abortEarly:false})
-
-    if (error){
-        const boxErros= error.details.map((d)=>d.message)
-       return res.status(400).send(boxErros)
-    }
-
-    res.locals.user=user
-
-    next()
+export  function userValidate (schema){
+    
+    return (req, res, next) => { 
+        const {error} = schema.validate(req.body, {abortEarly: false});
+        if (error) {
+          return res.status(422).send(error.details.map(detail => detail.message));
+        }
+    
+        next();
+      }
 }
 
 

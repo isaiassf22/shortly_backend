@@ -1,11 +1,10 @@
-import joi from 'joi'
+import joi from 'joi';
 
-
- export const userSchema= joi.object({
-    name: joi.string().min(3).max(30).required,
-    email: joi.string().max(50).required,
-    password: joi.string().min(3).max(15).required,
-    confirmPassword: joi.ref('password')
+ const userSchema= joi.object({
+    name: joi.string().required(),
+    email: joi.string().email().required(),
+    password: joi.string().required(),
+    confirmPassword: joi.ref("password")
 })
 
- 
+ export default userSchema
